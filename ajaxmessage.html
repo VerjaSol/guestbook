@@ -37,6 +37,7 @@ table tr:hover {background-color: #ddd;}
 
 
                 var nappi = document.getElementById("button");
+                //lisätään funtktio, joka poimi lomakkeen tiedot ...
                 nappi.addEventListener("click", function () {
                     var username = document.getElementById("aligned-name").value;
                     var country = document.getElementById("aligned-country").value;
@@ -50,7 +51,7 @@ table tr:hover {background-color: #ddd;}
                             console.log(this.responseText);
                         }
                     };
-                    // Lähetetään AJAX pyyntö, tyyppiä POST osoitteeseen /kirjaudu
+                    // ...ja lähettää AJAX pyynnön, tyyppiä POST osoitteeseen /guestbook
 
                     xmlhttp.open("POST", "/guestbook", true);
                     // This is for the form data
@@ -83,7 +84,7 @@ table tr:hover {background-color: #ddd;}
             </ul>
         </div> 
     <h2>Please, leave your message here!</h2>    
-     <form class="pure-form pure-form-aligned" name="ajaxmessage" onsubmit="return validateForm()" method="POST" action="/guestbook">
+    <form class="pure-form pure-form-aligned" name="ajaxmessage" onsubmit="return validateForm()" method="POST" action="/guestbook">
         <fieldset>
             <div class="pure-control-group">
                 <label for="aligned-name">Username</label>

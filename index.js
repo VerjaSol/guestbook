@@ -5,7 +5,7 @@ var app = express();
 var bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({extended: true}));
-
+//lisätään sisältöä kaikille reitille
 app.use(express.static("./"));
 
 app.get('/', function(req, res){
@@ -19,7 +19,7 @@ app.get('/newmessage', function(req, res){
 app.get('/ajaxmessage', function(req, res){
     res.sendFile(__dirname + '/ajaxmessage.html');
 });
-
+//reitti /guestbook saa POST komennolla tietoja, jotka lisataan json-tiedostoon
 app.post('/guestbook', function(req, res){
 
     var data = require('./guestbook.json');
@@ -36,7 +36,7 @@ app.post('/guestbook', function(req, res){
         if (err) throw err;
         console.log("It is saved");
     });
-
+    //luetaan json tiedosto taulukkoon ja lisataan styleja
     var results = '<table border = "1"><tr><th>User</th><th>Country</th><th>Message</th> </tr>';
 
     for (var i=0; i< data.length; i++){
@@ -55,7 +55,7 @@ app.post('/guestbook', function(req, res){
     res.end();
     
 });
-
+//tämä reitti käytetään silloin, kun tietoja ei lisätä vaan halutaan selata /guestbook reittiä
 app.get('/guestbook', function(req, res){
     var data = require('./guestbook.json');
     var results = '<table class="table" border = "1"><tr><th>User</th><th>Country</th><th>Message</th> </tr> <h1>Guestbook</h1>';
