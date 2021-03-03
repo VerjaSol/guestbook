@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <link
+  rel="stylesheet" 
+  href="https://unpkg.com/purecss@2.0.5/build/pure-min.css" 
+  integrity="sha384-LTIDeidl25h2dPxrB2Ekgc9c7sEC3CWGM6HeFmuDNUjX76Ert4Z4IY714dhZHPLd" 
+  crossorigin="anonymous">
+  <style>
+    div {
+      margin: 10px;
+    }
+    form {
+      border: 1px solid lightgrey;
+      padding: 10px;
+    }
+  </style>
+  <body>
+    <div class="pure-menu pure-menu-horizontal">
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item">
+                    <a href="/" class="pure-menu-link">Home</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="/guestbook" class="pure-menu-link">Guestbook</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="/newmessage" class="pure-menu-link">Leave a message</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="/ajaxmessage" class="pure-menu-link">Leave a message / Ajax</a>
+                </li>
+            </ul>
+        </div> 
+     <h2>Please, leave your message here!</h2>     
+     <form class="pure-form pure-form-aligned" name="newmessage" onsubmit="return validateForm()" method="POST" action="/guestbook">
+        <fieldset>
+            <div class="pure-control-group">
+                <label for="aligned-name">Username</label>
+                <input type="text" id="aligned-name" name="username" placeholder="Username" />
+            </div>
+            <div class="pure-control-group">
+                <label for="aligned-country">Country</label>
+                <input type="text" id="aligned-country" name = "country" placeholder="Country" />
+            </div>
+            <div class="pure-control-group">
+                <label for="aligned-message">Message</label>
+                <textarea class="pure-input-1-2" id="message" name="message" placeholder="Leave your message here"></textarea>
+            </div>
+            <div class="pure-controls">
+                <button type="submit" class="pure-button pure-button-primary">Send</button>
+            </div>
+        </fieldset>
+    </form>
+    
+    <!-- Tähän kenttään palautetaan AJAXin vastaus -->
+    <div id="status"></div>
+
+<!-- Tästä alkaa JavaScript -koodit -->
+    <script>
+        function validateForm() {
+            var x = document.forms["newmessage"]["username"].value;
+            var y = document.forms["newmessage"]["country"].value;
+            var z = document.forms["newmessage"]["message"].value;
+            if (x == "" || y == ""||z == "") {
+            alert("All fields must be filled out");
+        return false;
+  }
+} 
+    </script>
+   
+  </body>
+</html>

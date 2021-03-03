@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <link
+  rel="stylesheet" 
+  href="https://unpkg.com/purecss@2.0.5/build/pure-min.css" 
+  integrity="sha384-LTIDeidl25h2dPxrB2Ekgc9c7sEC3CWGM6HeFmuDNUjX76Ert4Z4IY714dhZHPLd" 
+  crossorigin="anonymous">
+  <style>
+    div {
+      margin: 10px;
+    }
+    form {
+      border: 1px solid lightgrey;
+      padding: 10px;
+    }
+    table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+  padding: 20px;
+}
+
+table td, table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+table tr:nth-child(even){background-color: #f2f2f2;}
+
+table tr:hover {background-color: #ddd;}
+  </style>
+  <script>
+
+    window.onload = event => {
+
+        // Varmistetaan että sivu on ladattu kokonaan
+
+
+                var nappi = document.getElementById("button");
+                nappi.addEventListener("click", function () {
+                    var username = document.getElementById("aligned-name").value;
+                    var country = document.getElementById("aligned-country").value;
+                    var message = document.getElementById("aligned-message").value;
+
+                    var xmlhttp = new XMLHttpRequest();
+
+                    xmlhttp.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+                            document.getElementById("status").innerHTML = this.responseText;
+                            console.log(this.responseText);
+                        }
+                    };
+                    // Lähetetään AJAX pyyntö, tyyppiä POST osoitteeseen /kirjaudu
+
+                    xmlhttp.open("POST", "/guestbook", true);
+                    // This is for the form data
+                    xmlhttp.setRequestHeader(
+                        "Content-type",
+                        "application/x-www-form-urlencoded"
+                    );
+                    xmlhttp.send("username=" + username + "&country=" + country + "&message" + message);
+                });
+            }
+    
+    
+</script>
+
+  <body>
+    <div class="pure-menu pure-menu-horizontal">
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item">
+                    <a href="/" class="pure-menu-link">Home</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="/guestbook" class="pure-menu-link">Guestbook</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="/newmessage" class="pure-menu-link">Leave a message</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="/ajaxmessage" class="pure-menu-link">Leave a message / Ajax</a>
+                </li>
+            </ul>
+        </div> 
+    <h2>Please, leave your message here!</h2>    
+     <form class="pure-form pure-form-aligned" name="ajaxmessage" onsubmit="return validateForm()" method="POST" action="/guestbook">
+        <fieldset>
+            <div class="pure-control-group">
+                <label for="aligned-name">Username</label>
+                <input type="text" id="aligned-name" name="username" placeholder="Username" />
+            </div>
+            <div class="pure-control-group">
+                <label for="aligned-country">Country</label>
+                <input type="text" id="aligned-country" name = "country" placeholder="Country" />
+            </div>
+            <div class="pure-control-group">
+                <label for="aligned-message">Message</label>
+                <textarea class="pure-input-1-2" id="aligned-message" name="message" placeholder="Leave your message here"></textarea>
+            </div>
+            <div class="pure-controls">
+                <button type="button" id="button" class="pure-button pure-button-primary">Send</button>
+            </div>
+        </fieldset>
+    </form>
+    
+    <!-- Tähän kenttään palautetaan AJAXin vastaus -->
+    <div id="status"></div>
+
+    <script>
+       
+    </script>
+   
+  </body>
+</html>
