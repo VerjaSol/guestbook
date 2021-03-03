@@ -5,10 +5,10 @@
   "engines": {
     "node": "12.x"
   },
-  "main": "guestbook.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node guestbook.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
