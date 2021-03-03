@@ -3,6 +3,7 @@ var express = require('express');
 var fs = require("fs");
 var app = express();
 var bodyParser = require('body-parser');
+const PORT = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static("./"));
@@ -79,7 +80,5 @@ app.get('*', function(req, res){
     res.send('Cannot find the page');
 });
 
-app.listen(8000, function(){
-    console.log('Local host 8000');
-});
+app.listen(PORT);
 
